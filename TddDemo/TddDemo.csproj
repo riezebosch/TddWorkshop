@@ -40,6 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankCodeProvider.cs" />
+    <Compile Include="IBankCodeProvider.cs" />
+    <Compile Include="IbanValidator.cs" />
+    <Compile Include="IbanValidatorBE.cs" />
+    <Compile Include="IbanValidatorNL.cs" />
+    <Compile Include="IIbanValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
