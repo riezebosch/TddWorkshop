@@ -11,6 +11,7 @@ namespace TddDemo.Contracts
     public interface ISchoolService
     {
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Mandatory)]
         DataContracts.Person AddPerson(DataContracts.Person person);
     }
 }

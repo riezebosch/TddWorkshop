@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TddDemo.Contracts;
 using TddDemo.DataAccess;
 using AutoMapper;
+using System.ServiceModel;
 
 namespace TddDemo
 {
@@ -24,6 +25,12 @@ namespace TddDemo
             this.db = db;
         }
 
+        public SchoolService() 
+            :this (new SchoolContext())
+        {
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true)]
         public DataContracts.Person AddPerson(DataContracts.Person person)
         {
             var input = Mapper.Map<DataAccess.Person>(person);
