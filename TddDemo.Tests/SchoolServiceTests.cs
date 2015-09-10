@@ -13,6 +13,12 @@ namespace TddDemo.Tests
     [TestClass]
     public class SchoolServiceTests
     {
+        [MyMessageInspectorServiceBehavior]
+        class SchoolServiceDemo : SchoolService
+        {
+
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
@@ -20,7 +26,7 @@ namespace TddDemo.Tests
             {
                 using (new TransactionScope())
                 {
-                    var host = new ServiceHost(typeof(SchoolService));
+                    var host = new ServiceHost(typeof(SchoolServiceDemo));
 
                     try
                     {
