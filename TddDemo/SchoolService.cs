@@ -7,6 +7,7 @@ using TddDemo.Contracts;
 using TddDemo.DataAccess;
 using AutoMapper;
 using System.ServiceModel;
+using System.Security.Permissions;
 
 namespace TddDemo
 {
@@ -31,6 +32,7 @@ namespace TddDemo
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Name = "Manuel")]
         public DataContracts.Person AddPerson(DataContracts.Person person)
         {
             var input = Mapper.Map<DataAccess.Person>(person);
