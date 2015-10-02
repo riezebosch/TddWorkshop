@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MinDef.TestDemo;
 using MinDef.TestDemo.Objects;
 using System.Transactions;
+using System.Linq;
+using Moq;
+using System.Collections.Generic;
 
 namespace MinDef.TestDemo.Tests
 {
@@ -69,17 +72,33 @@ namespace MinDef.TestDemo.Tests
         }
 
         [TestMethod]
-        public void GivenAValidTankWhenStoreThenSaveChangesIsCalled()
+        public void GivenAValidTankWhenStoreThenTankIsSaved()
         {
-            using (StoreContextFake context = new StoreContextFake())
-            {
-                var tank = new Tank { Kenteken = "AA-123" };
-                var storer = new ObjectStorer(context);
+            StoreContextFake context = new StoreContextFake();
+            var tank = new Tank { Kenteken = "AA-123" };
+            var storer = new ObjectStorer(context);
 
-                var result = storer.Store(tank);
+            var result = storer.Store(tank);
 
-                Assert.IsTrue(context.IsSaveChangesCalled());
-            }
+            CollectionAssert.Contains(context.Tanks.ToList(), tank);
+            Assert.IsTrue(context.IsSaveChangesCalled());
+        }
+
+        [TestMethod]
+        public void GivenAValidTankWhenStoreThenTankIsSaved_UsingMoq()
+        {
+            var context = new Mock<IStoreContext>();
+            context.Setup(c => c.SaveChanges()).Verifiable();
+            context.Setup(c => c.Tanks).Returns(new List<Tank>()).Verifiable();
+            
+            var tank = new Tank { Kenteken = "AA-123" };
+            
+            var storer = new ObjectStorer(context.Object);
+
+            var result = storer.Store(tank);
+
+            context.Verify();
+            
         }
     }
 }

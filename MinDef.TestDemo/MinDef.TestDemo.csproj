@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DuplicateKentekenException.cs" />
+    <Compile Include="IStoreContext.cs" />
     <Compile Include="IVoertuig.cs" />
     <Compile Include="ObjectStorer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

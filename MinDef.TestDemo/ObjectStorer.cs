@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinDef.TestDemo.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace MinDef.TestDemo
     {
         IDictionary<string, object> _items
             = new Dictionary<string, object>();
-        private StoreContext context;
+        private IStoreContext context;
 
-        internal ObjectStorer(StoreContext context)
+        internal ObjectStorer(IStoreContext context)
         {
             this.context = context;
         }
@@ -41,6 +42,10 @@ namespace MinDef.TestDemo
                 throw new DuplicateKentekenException();
             }
 
+            if (v is Tank)
+            {
+                context.Tanks.Add((Tank)v);
+            }
             _items.Add(v.Kenteken, v);
         }
 
