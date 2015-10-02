@@ -81,5 +81,15 @@ namespace MinDef.TestDemo.Tests
                 Assert.IsTrue(context.IsSaveChangesCalled());
             }
         }
+
+        [TestMethod]
+        [NinjaTurtles.MutationTest]
+        public void AddMutationTests()
+        {
+            NinjaTurtles.MutationTestBuilder<ObjectStorer>
+                .For("Store", new[] { typeof(object) })
+                .UsingRunner<NinjaTurtles.TestRunners.MSTestTestRunner>()
+                .Run();
+        }
     }
 }
