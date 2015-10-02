@@ -8,9 +8,7 @@ namespace MinDef.TestDemo
 {
     internal class ObjectStorer
     {
-        IDictionary<string, object> _items
-            = new Dictionary<string, object>();
-        private IStoreContext context;
+         private IStoreContext context;
 
         internal ObjectStorer(IStoreContext context)
         {
@@ -36,8 +34,7 @@ namespace MinDef.TestDemo
 
         private void Store(IVoertuig v)
         {
-            context.SaveChanges();
-            if (_items.ContainsKey(v.Kenteken))
+            if (context.Tanks.Any(i => i.Kenteken == v.Kenteken))
             {
                 throw new DuplicateKentekenException();
             }
@@ -46,7 +43,9 @@ namespace MinDef.TestDemo
             {
                 context.Tanks.Add((Tank)v);
             }
-            _items.Add(v.Kenteken, v);
+
+            context.SaveChanges();
+
         }
 
     }

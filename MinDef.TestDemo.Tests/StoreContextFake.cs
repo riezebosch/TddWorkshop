@@ -1,6 +1,7 @@
 ﻿using MinDef.TestDemo.Objects;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace MinDef.TestDemo.Tests
     {
         public StoreContextFake()
         {
-            Tanks = new List<Tank>();
+            Tanks = new FakeDbSet.InMemoryDbSet<Tank>();
         }
 
           public bool IsSaveChangesCalled()
@@ -26,6 +27,6 @@ namespace MinDef.TestDemo.Tests
 
         public bool _save { get; set; }
 
-        public IList<Tank> Tanks { get; set; }
+        public IDbSet<Tank> Tanks { get; set; }
     }
 }

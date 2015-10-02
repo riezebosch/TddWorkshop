@@ -89,7 +89,7 @@ namespace MinDef.TestDemo.Tests
         {
             var context = new Mock<IStoreContext>();
             context.Setup(c => c.SaveChanges()).Verifiable();
-            context.Setup(c => c.Tanks).Returns(new List<Tank>()).Verifiable();
+            context.Setup(c => c.Tanks).Returns(new FakeDbSet.InMemoryDbSet<Tank>()).Verifiable();
             
             var tank = new Tank { Kenteken = "AA-123" };
             

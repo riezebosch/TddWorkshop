@@ -9,7 +9,7 @@ namespace MinDef.TestDemo
 {
     public class StoreContext : DbContext, IStoreContext
     {
-        public IList<Tank> Tanks { get; set; }
+        public IDbSet<Tank> Tanks { get; set; }
 
 
     }
