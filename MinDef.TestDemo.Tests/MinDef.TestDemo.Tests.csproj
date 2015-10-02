@@ -35,7 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <Choose>
@@ -51,14 +58,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StoreContextFake.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MinDef.TestDemo\MinDef.TestDemo.csproj">
       <Project>{f4ddefb8-50dd-41a3-a3ed-1b19d1e3179c}</Project>
       <Name>MinDef.TestDemo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

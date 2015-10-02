@@ -56,5 +56,30 @@ namespace MinDef.TestDemo.Tests
 
             // Assert?!?!?!?!?!
         }
+
+        [TestMethod]
+        public void GivenAnUnkownObjectWhenStoreThenResultIsFalse()
+        {
+            object input = new object();
+            var storer = new ObjectStorer();
+
+            var result = storer.Store(input);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void GivenAValidTankWhenStoreThenSaveChangesIsCalled()
+        {
+            using (StoreContextFake context = new StoreContextFake())
+            {
+                var tank = new Tank { Kenteken = "AA-123" };
+                var storer = new ObjectStorer(context);
+
+                var result = storer.Store(tank);
+
+                Assert.IsTrue(context.IsSaveChangesCalled());
+            }
+        }
     }
 }
