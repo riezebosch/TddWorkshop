@@ -5,11 +5,11 @@ namespace TddDemo
 {
     public class IbanValidator
     {
-        private IBankIdentifierCodeValidator mock;
+        private IBankIdentifierCodeValidator bic;
 
-        public IbanValidator(IBankIdentifierCodeValidator mock)
+        public IbanValidator(IBankIdentifierCodeValidator bic)
         {
-            this.mock = mock;
+            this.bic = bic;
         }
 
         public bool Validate(string iban)
@@ -27,7 +27,7 @@ namespace TddDemo
             var match = Regex.Match(iban, @"NL\d{2}(?<bic>.{4}).*");
             var bic = match.Groups["bic"].Value;
 
-            if (!mock.Validate(bic))
+            if (!this.bic.Validate(bic))
             {
                 return false;
             }
