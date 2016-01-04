@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
 namespace TddDemo.Tests
 {
@@ -91,7 +92,11 @@ namespace TddDemo.Tests
         public void TestRetreiveBankCodeFromIbanWithSpaces()
         {
             var iban = new Iban("NL 91 XXXX 0417164300");
-            Assert.AreEqual("XXXX", iban.BankCode);
+
+            // Hier gebruik ik het Shouldly framework
+            // voor assertions, wat voor veel leesbare
+            // validaties zorgt!
+            iban.BankCode.ShouldBe("XXXX");
         }
     }
 }
