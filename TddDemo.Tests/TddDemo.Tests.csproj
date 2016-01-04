@@ -52,8 +52,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BankIdentifierCodeProviderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IbanTests.cs" />
+    <Compile Include="BankIdentifierCodeProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TddDemo\TddDemo.csproj">
