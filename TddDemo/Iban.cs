@@ -55,8 +55,9 @@ namespace TddDemo
             //NL91ABNA0417164300
             //NL86INGB0002445588
             if (ValidateLandCode(_iban) && 
-                ValidateLength(_iban) && 
-                _bic.ValidateBankCode(BankCode))
+                ValidateLength(_iban) 
+                && _bic.ValidateBankCode(BankCode)
+                )
             {
                 return true;
             }

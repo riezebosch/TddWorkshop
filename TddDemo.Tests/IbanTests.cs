@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+using Moq;
 
 namespace TddDemo.Tests
 {
@@ -79,6 +80,23 @@ namespace TddDemo.Tests
             var iban = new Iban("NL91XXXX0417164300", new BankIdentifierCodeProviderMock());
 
             Assert.IsFalse(iban.Validate());
+        }
+
+        [TestMethod]
+        public void IbanMetOngeldigeBankCode_BijValideren_GeeftFalseTerug_MetMockingFramework()
+        {
+            var bic = new Mock<IBankIdentifierCodeProvider>();
+            bic.
+                Setup(m => m.ValidateBankCode(It.IsAny<string>())).
+                Returns(false)
+                .Verifiable();
+
+            bic.Setup(m => m.ValidateBankCode("XXXX"));
+
+            var iban = new Iban("NL91RABO0417164300", bic.Object);
+
+            Assert.IsFalse(iban.Validate());
+            bic.Verify();
         }
 
         [TestMethod]
