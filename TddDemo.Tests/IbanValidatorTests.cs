@@ -32,5 +32,37 @@ namespace TddDemo.Tests
 
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void IbanNotStartingWithNLShouldReturnFalse()
+        {
+            // Arrange
+            string iban = "XX78RABO0162136188";
+            bool expected = false;
+
+            var validator = new IbanValidator();
+
+            // Act
+            bool result = validator.Validate(iban);
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void CheckDigitsNotNumbersShouldReturnFalse()
+        {
+            // Arrange
+            string iban = "NLXXRABO0162136188";
+            bool expected = false;
+
+            var validator = new IbanValidator();
+
+            // Act
+            bool result = validator.Validate(iban);
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
     }
 }

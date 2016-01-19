@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace TddDemo
 {
@@ -10,7 +11,7 @@ namespace TddDemo
 
         public bool Validate(string iban)
         {
-            return (iban != "");
+            return Regex.IsMatch(iban, @"^NL\d{2}");
         }
     }
 }
