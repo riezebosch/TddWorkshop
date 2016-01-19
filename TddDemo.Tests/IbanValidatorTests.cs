@@ -63,6 +63,27 @@ namespace TddDemo.Tests
 
             // Assert
             Assert.AreEqual(expected, result);
+
         }
+
+        [TestMethod]
+        public void IbanWithInvalidBankCodeShouldReturnFalse()
+        {
+            // Arrange
+            IBankCodeValidator bcv = new BankCodeValidatorMock();
+
+            string iban = "NL78RABO0162136188";
+            bool expected = false;
+
+            var validator = new IbanValidator(bcv);
+
+            // Act
+            bool result = validator.Validate(iban);
+
+            // Assert
+            Assert.AreEqual(expected, result);
+        }
+
+        
     }
 }

@@ -1,17 +1,29 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace TddDemo
 {
     public class IbanValidator
     {
-        public IbanValidator()
+        private IBankCodeValidator bcv;
+
+        public IbanValidator() : this(new BankCodeValidator())
         {
+        }
+
+        internal IbanValidator(IBankCodeValidator bcv)
+        {
+            this.bcv = bcv;
         }
 
         public bool Validate(string iban)
         {
-            return Regex.IsMatch(iban, @"^NL\d{2}");
+            if (string.IsNullOrEmpty(iban))
+            {
+                return false;
+            }
+
+            return Regex.IsMatch(iban, @"^NL\d{2}") && bcv.IsValidBankCode(iban);
+            ;
         }
     }
 }

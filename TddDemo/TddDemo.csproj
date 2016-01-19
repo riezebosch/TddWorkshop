@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankCodeValidator.cs" />
+    <Compile Include="IBankCodeValidator.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
