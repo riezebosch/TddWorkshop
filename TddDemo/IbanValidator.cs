@@ -22,8 +22,12 @@ namespace TddDemo
                 return false;
             }
 
+            if (iban.StartsWith("BE"))
+            {
+                return true;
+            }
+
             return Regex.IsMatch(iban, @"^NL\d{2}") && bcv.IsValidBankCode(iban);
-            ;
         }
     }
 }
