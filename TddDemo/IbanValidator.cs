@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace TddDemo
 {
@@ -6,7 +7,7 @@ namespace TddDemo
     {
         public bool Validate(string input)
         {
-            return (input != string.Empty);
+            return Regex.IsMatch(input, "^NL.*");
         }
     }
 }
