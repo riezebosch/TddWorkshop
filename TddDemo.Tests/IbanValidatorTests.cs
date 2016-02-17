@@ -47,5 +47,19 @@ namespace TddDemo.Tests
             // Assert
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void GivenCheckDigitsNotNumbers_WhenValidate_ThenResultFalse()
+        {
+                   // Arrange
+            string input = "NLXXRABO0162136188";
+            var validator = new IbanValidator();
+
+            // Act
+            bool result = validator.Validate(input);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }

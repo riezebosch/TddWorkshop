@@ -7,7 +7,7 @@ namespace TddDemo
     {
         public bool Validate(string input)
         {
-            return Regex.IsMatch(input, "^NL.*");
+            return Regex.IsMatch(input, @"^NL\d{2}.*");
         }
     }
 }
