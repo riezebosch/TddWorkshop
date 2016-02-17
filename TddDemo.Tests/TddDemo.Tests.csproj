@@ -50,6 +50,10 @@
     <Reference Include="System.4.0.0.0.Fakes">
       <HintPath>FakesAssemblies\System.4.0.0.0.Fakes.dll</HintPath>
     </Reference>
+    <Reference Include="TechTalk.SpecFlow, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.2.0.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -67,6 +71,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BankCodeProviderMock.cs" />
+    <Compile Include="BelgianIban.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BelgianIban.feature</DependentUpon>
+    </Compile>
+    <Compile Include="BelgianIbanSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IbanValidatorTests.cs" />
     <Compile Include="UglyHardToTest.cs" />
@@ -80,6 +90,11 @@
   <ItemGroup>
     <Fakes Include="Fakes\System.fakes" />
     <Fakes Include="Fakes\mscorlib.fakes" />
+    <None Include="App.config" />
+    <None Include="BelgianIban.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BelgianIban.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

@@ -22,6 +22,11 @@ namespace TddDemo
 
         public bool Validate(string input)
         {
+            // TODO: Refactoring naar eigen validator per land: Open/Closed principle
+            if (input.StartsWith("BE"))
+            {
+                return true;
+            }
             var match = Regex.Match(input, @"^NL\d{2}(?<bc>.{4}).*");
             if (match.Success)
             {
