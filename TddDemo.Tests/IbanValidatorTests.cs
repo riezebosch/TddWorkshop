@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Collections.Generic;
 
 namespace TddDemo.Tests
 {
@@ -51,7 +53,7 @@ namespace TddDemo.Tests
         [TestMethod]
         public void GivenCheckDigitsNotNumbers_WhenValidate_ThenResultFalse()
         {
-                   // Arrange
+            // Arrange
             string input = "NLXXRABO0162136188";
             var validator = new IbanValidator();
 
@@ -60,6 +62,70 @@ namespace TddDemo.Tests
 
             // Assert
             Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void GivenInvalidBankCode_WhenValidate_ThenResultFalse()
+        {
+            // Arrange
+            string input = "NL78XXXX0162136188";
+            var validator = new IbanValidator();
+
+            // Act
+            bool result = validator.Validate(input);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void GivenAnotherValidBankCode_WhenValidate_ThenResultTrue()
+        {
+            // Arrange
+            string input = "NL35INGB0008804468";
+            var validator = new IbanValidator();
+
+            // Act
+            bool result = validator.Validate(input);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GivenBankCodeDeniedByProvider_WhenValidate_ThenResultFalse()
+        {
+            // Arrange
+            string input = "NL78RABO0162136188";
+            var validator = new IbanValidator(new BankCodeProviderMock());
+
+            // Act
+            bool result = validator.Validate(input);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void GivenBankCodeDeniedByProviderCreatedWithMoq_WhenValidate_ThenResultFalse()
+        {
+            // Arrange
+            string input = "NL78RABO0162136188";
+
+            var mock = new Mock<IBankCodeProvider>();
+            mock
+                .Setup(m => m.BankCodes)
+                .Returns(new List<string>())
+                .Verifiable();
+
+            var validator = new IbanValidator(mock.Object);
+
+            // Act
+            bool result = validator.Validate(input);
+
+            // Assert
+            Assert.IsFalse(result);
+            mock.Verify();
         }
     }
 }
