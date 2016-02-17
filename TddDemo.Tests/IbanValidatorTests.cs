@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using Shouldly;
 
 namespace TddDemo.Tests
 {
@@ -89,7 +90,7 @@ namespace TddDemo.Tests
             bool result = validator.Validate(input);
 
             // Assert
-            Assert.IsTrue(result);
+            result.ShouldBeTrue();
         }
 
         [TestMethod]
@@ -103,7 +104,7 @@ namespace TddDemo.Tests
             bool result = validator.Validate(input);
 
             // Assert
-            Assert.IsFalse(result);
+            result.ShouldBeFalse();
         }
 
         [TestMethod]
@@ -124,7 +125,7 @@ namespace TddDemo.Tests
             bool result = validator.Validate(input);
 
             // Assert
-            Assert.IsFalse(result);
+            result.ShouldBeFalse();
             mock.Verify();
         }
     }
