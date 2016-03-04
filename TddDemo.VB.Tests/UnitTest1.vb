@@ -1,6 +1,6 @@
 ﻿Imports System.Text
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
-
+Imports Shouldly
 <TestClass()> Public Class UnitTest1
 
     <TestMethod()> Public Sub TestMethod1()
@@ -14,7 +14,11 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
     <TestMethod()>
     Public Sub LeegProjectNummerGeeftFalseTerug()
-        Assert.IsFalse(New ProjectNummer(Nothing).Check())
+        Dim pnc As New ProjectNummer(Nothing)
+        Assert.IsFalse(pnc.Check())
+
+        'Shouldly verhoogt de leesbaarheid en produceert een meer gedetailleerde foutmelding.
+        pnc.Check().ShouldBeFalse()
     End Sub
 
 End Class

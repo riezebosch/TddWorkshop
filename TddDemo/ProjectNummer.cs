@@ -25,7 +25,8 @@ namespace TddDemo
         /// <returns>True bij een geldig project nummer, anders false.</returns>
         public bool Check()
         {
-            if (projectnummer.Length == 8)
+            if (!string.IsNullOrEmpty(projectnummer) && 
+                projectnummer.Length == 8)
             {
                 return true;
             }
