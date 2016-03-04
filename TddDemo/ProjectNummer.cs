@@ -16,6 +16,11 @@ namespace TddDemo
         /// <param name="projectnummer">Project nummer</param>
         public ProjectNummer(string projectnummer)
         {
+            if (projectnummer == null)
+            {
+                throw new ArgumentOutOfRangeException("projectnummer");
+            }
+
             this.projectnummer = projectnummer;
         }
 
@@ -25,11 +30,11 @@ namespace TddDemo
         /// <returns>True bij een geldig project nummer, anders false.</returns>
         public bool Check()
         {
-            if (!string.IsNullOrEmpty(projectnummer) && 
-                projectnummer.Length == 8)
+            if (projectnummer.Length == 8)
             {
                 return true;
             }
+
             return false;
         }
     }

@@ -14,11 +14,31 @@ Imports Shouldly
 
     <TestMethod()>
     Public Sub LeegProjectNummerGeeftFalseTerug()
-        Dim pnc As New ProjectNummer(Nothing)
+        Dim pnc As New ProjectNummer("")
         Assert.IsFalse(pnc.Check())
 
         'Shouldly verhoogt de leesbaarheid en produceert een meer gedetailleerde foutmelding.
         pnc.Check().ShouldBeFalse()
     End Sub
 
+    <TestMethod()>
+    <ExpectedException(GetType(ArgumentOutOfRangeException))>
+    Public Sub LeegProjectNummerGeeftException_ExpectedException()
+        Dim pnc As New ProjectNummer(Nothing)
+    End Sub
+
+    <TestMethod()>
+    Public Sub LeegProjectNummerGeeftException_TryCatch()
+        Try
+            Dim pnc As New ProjectNummer(Nothing)
+            Assert.Fail()
+        Catch ex As ArgumentOutOfRangeException
+        End Try
+    End Sub
+
+    <TestMethod()>
+    Public Sub LeegProjectNummerGeeftException_Shoudly()
+        Dim pnc As ProjectNummer
+        Should.Throw(Of ArgumentOutOfRangeException)(Sub() pnc = New ProjectNummer(Nothing))
+    End Sub
 End Class
