@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Text;
 using System.IO;
+using Microsoft.QualityTools.Testing.Fakes;
 
 namespace TddDemo.Tests
 {
@@ -191,6 +192,28 @@ namespace TddDemo.Tests
             {
                 mock(i);
             }
+        }
+
+
+        [TestMethod]
+        public void TestMetFakes()
+        {
+            Console.WriteLine(DateTime.Today);
+            using (ShimsContext.Create())
+            {
+                Console.WriteLine(DateTime.Today);
+                System.Fakes.ShimDateTime.TodayGet = () => new DateTime(2015, 04, 05);
+                Console.WriteLine(DateTime.Today);
+
+                int age = Calc(new DateTime(1982, 04, 05));
+                Assert.AreEqual(33, age); 
+            }
+            Console.WriteLine(DateTime.Today);
+        }
+
+        private int Calc(DateTime birth)
+        {
+            return DateTime.Today.Year - birth.Year;
         }
     }
 }
