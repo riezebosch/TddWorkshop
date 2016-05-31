@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankCodeHelper.cs" />
+    <Compile Include="DefaultValidator.cs" />
     <Compile Include="IBankCodeHelper.cs" />
     <Compile Include="IbanValidator.cs" />
+    <Compile Include="IbanValidatorNL.cs" />
+    <Compile Include="IIbanValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

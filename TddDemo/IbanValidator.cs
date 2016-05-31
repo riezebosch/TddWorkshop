@@ -1,44 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TddDemo
 {
     public class IbanValidator
     {
-        private IBankCodeHelper helper;
-
+        private IDictionary<string, IIbanValidator> validators;
         public IbanValidator(IBankCodeHelper helper)
         {
-            this.helper = helper;
+            validators = new Dictionary<string, IIbanValidator>();
+            validators["NL"] = new IbanValidatorNL(helper);
         }
 
-        public IbanValidator() : this (new BankCodeHelper())
+        public IbanValidator(): this (new BankCodeHelper())
         {
         }
 
         public bool ValidateIban(string iban)
         {
-            if (iban.StartsWith("NL"))
-            {
-                var match = Regex.Match(iban, @"NL\d{2}(?<bankcode>.{4}).{10}");
-                if (!match.Success)
-                {
-                    return false;
-                }
+            var land = iban.Substring(0, 2);
+            IIbanValidator validator;
 
-                var bankcode = match.Groups["bankcode"].Value;
-                return helper.CheckBankcode(bankcode);
-            }
-            else
+            if (!validators.TryGetValue(land, out validator))
             {
-                return Regex.IsMatch(iban, "[A-Z]{2}.*");
+                validator = new DefaultValidator();
             }
+
+            return validator.Validate(iban);
         }
-
-        
     }
 }

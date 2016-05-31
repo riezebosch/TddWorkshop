@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Text;
+using System.IO;
 
 namespace TddDemo.Tests
 {
@@ -111,6 +113,84 @@ namespace TddDemo.Tests
             new IbanValidator(mock.Object).ValidateIban(iban);
 
             mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void TestDat10ConsoleLogIsAangeroepenMetExtraInterface()
+        {
+            var logger = new MockLogger();
+            PrintFizzBuzz(logger);
+
+            Assert.AreEqual(10, logger.Count);
+        }
+
+        interface ILogger
+        {
+            void Write(int i);
+        }
+
+        class MockLogger : ILogger
+        {
+            public int Count { get; private set; }
+
+            public void Write(int i)
+            {
+                Count++;
+            }
+        }
+
+        class ConsoleLogger : ILogger
+        {
+            public void Write(int i)
+            {
+                Console.Write(i);
+            }
+        }
+
+        private void PrintFizzBuzz(ILogger logger)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                logger.Write(i);
+            }
+        }
+
+        [TestMethod]
+        public void TestDat10xConsoleLogIsAangeroepen()
+        {
+            var mock = new StringBuilder();
+            Console.SetOut(new StringWriter(mock));
+
+            PrintFizzBuzz();
+            Assert.AreEqual("0123456789", mock.ToString());
+        }
+
+        private void PrintFizzBuzz()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write(i);
+            }
+        }
+
+        [TestMethod]
+        public void TestDat10xConsoleLogIsAangeroepen2()
+        {
+            int i = 0;
+            Action<object> mock = (m) => i++;
+
+            PrintFizzBuzz(mock);
+            //PrintFizzBuzz(Console.Write);
+
+            Assert.AreEqual(10, i);
+        }
+
+        private void PrintFizzBuzz(Action<object> mock)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                mock(i);
+            }
         }
     }
 }
