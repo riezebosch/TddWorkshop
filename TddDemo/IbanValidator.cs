@@ -9,16 +9,36 @@ namespace TddDemo
 {
     public class IbanValidator
     {
-        public static bool ValidateIban(string iban)
+        private IBankCodeHelper helper;
+
+        public IbanValidator(IBankCodeHelper helper)
+        {
+            this.helper = helper;
+        }
+
+        public IbanValidator() : this (new BankCodeHelper())
+        {
+        }
+
+        public bool ValidateIban(string iban)
         {
             if (iban.StartsWith("NL"))
             {
-                return Regex.IsMatch(iban, @"NL\d{2}.{14}");
+                var match = Regex.Match(iban, @"NL\d{2}(?<bankcode>.{4}).{10}");
+                if (!match.Success)
+                {
+                    return false;
+                }
+
+                var bankcode = match.Groups["bankcode"].Value;
+                return helper.CheckBankcode(bankcode);
             }
             else
             {
                 return Regex.IsMatch(iban, "[A-Z]{2}.*");
             }
         }
+
+        
     }
 }
