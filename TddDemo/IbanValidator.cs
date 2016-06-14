@@ -17,6 +17,11 @@ namespace TddDemo
 
         public bool ValidateIban(string iban)
         {
+            if (iban == null || iban.Length < 2)
+            {
+                return false;
+            }
+
             var land = iban.Substring(0, 2);
             IIbanValidator validator;
 
