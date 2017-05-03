@@ -33,7 +33,16 @@ namespace TddDemo
 
         private static bool ContainsValidBankCode(string input)
         {
-            return input.Substring(4, 4) == "INGB";
+            string[] codes = new BankCodeProvider().BankCodes();
+            return codes.Contains(input.Substring(4, 4));
+        }
+
+        class BankCodeProvider
+        {
+            public string[] BankCodes()
+            {
+                return new[] { "INGB" };
+            }
         }
 
         private static string RemoveWhitespace(string input)
