@@ -22,7 +22,26 @@ namespace TddDemo.Tests
 
         private static bool ValidateIban(string input)
         {
+            if (input.Length != 22)
+            {
+                return false;
+            }
+
             return true;
+        }
+
+        [TestMethod]
+        public void GivenInvalidIban_WhenValidate_ThenResultIsFalse()
+        {
+            // Arrange
+            string input = "NL74 INGB 0671 5336 6";
+            bool expected = false;
+
+            // Act
+            bool actual = ValidateIban(input);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
