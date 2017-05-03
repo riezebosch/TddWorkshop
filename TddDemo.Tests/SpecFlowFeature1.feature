@@ -4,7 +4,14 @@
 	I want to be told if my IBAN is valid
 
 @mytag
-Scenario: Valid IBAN
-	Given I have entered "NL74 INGB 0671 5336 65" into the validator
+Scenario Outline: Validate IBAN
+	Given I have entered "<iban>" into the validator
 	When I execute Validate
-	Then the result should be true
+	Then the result should be <expected>
+
+Examples:
+	| type       | iban                   | expected |
+	| valid      | NL74 INGB 0671 5336 65 | true     |
+	| whitespace | NL74INGB0671533665     | true     |
+	| short      | NL74INGB067153366      | false    |
+	| bankcode   | NL74ZZZZ0671533665     | false    |
