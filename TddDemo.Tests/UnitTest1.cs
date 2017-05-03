@@ -14,10 +14,15 @@ namespace TddDemo.Tests
             bool expected = true;
 
             // Act
-            bool actual = true;
+            bool actual = ValidateIban(input);
 
             // Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        private static bool ValidateIban(string input)
+        {
+            return true;
         }
     }
 }
