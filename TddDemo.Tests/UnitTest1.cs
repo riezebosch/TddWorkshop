@@ -9,15 +9,12 @@ namespace TddDemo.Tests
         [TestMethod]
         public void GivenValidIban_WhenValidate_ThenResultIsTrue()
         {
-            // Arrange
-            string input = "NL74 INGB 0671 5336 65";
-            bool expected = true;
+            ExecuteValidate("NL74 INGB 0671 5336 65", true);
+        }
 
-            // Act
-            bool actual = ValidateIban(input);
-
-            // Assert
-            Assert.AreEqual(expected, actual);
+        private static void ExecuteValidate(string input, bool expected)
+        {
+            Assert.AreEqual(expected, ValidateIban(input));
         }
 
         private static bool ValidateIban(string input)
@@ -33,29 +30,13 @@ namespace TddDemo.Tests
         [TestMethod]
         public void GivenInvalidIban_WhenValidate_ThenResultIsFalse()
         {
-            // Arrange
-            string input = "NL74 INGB 0671 5336 6";
-            bool expected = false;
-
-            // Act
-            bool actual = ValidateIban(input);
-
-            // Assert
-            Assert.AreEqual(expected, actual);
+            ExecuteValidate("NL74 INGB 0671 5336 6", false);
         }
 
         [TestMethod]
         public void GivenValidIbanWithoutWhitespace_WhenValidate_ThenResultIsTrue()
         {
-            // Arrange
-            string input = "NL74INGB0671533665";
-            bool expected = true;
-
-            // Act
-            bool actual = ValidateIban(input);
-
-            // Assert
-            Assert.AreEqual(expected, actual);
+            ExecuteValidate("NL74INGB0671533665", true);
         }
     }
 }
