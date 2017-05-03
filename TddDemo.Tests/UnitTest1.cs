@@ -9,12 +9,12 @@ namespace TddDemo.Tests
         [TestMethod]
         public void GivenValidIban_WhenValidate_ThenResultIsTrue()
         {
-            ExecuteValidate("NL74 INGB 0671 5336 65", true);
+            ExecuteValidate(iban: "NL74 INGB 0671 5336 65", expected: true);
         }
 
-        private static void ExecuteValidate(string input, bool expected)
+        private static void ExecuteValidate(string iban, bool expected)
         {
-            Assert.AreEqual(expected, ValidateIban(input));
+            Assert.AreEqual(expected, ValidateIban(iban));
         }
 
         private static bool ValidateIban(string input)
