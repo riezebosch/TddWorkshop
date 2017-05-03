@@ -12,7 +12,8 @@ namespace TddDemo
 
         public static bool ValidateIban(string input)
         {
-            if (input.Replace(" ", "").Length != IBAN_LENGTH)
+            input = RemoveWhitespace(input);
+            if (input.Length != IBAN_LENGTH)
             {
                 return false;
             }
@@ -22,7 +23,17 @@ namespace TddDemo
                 return false;
             }
 
+            if (input.Substring(4, 4) != "INGB")
+            {
+                return false;
+            }
+
             return true;
+        }
+
+        private static string RemoveWhitespace(string input)
+        {
+            return input.Replace(" ", "");
         }
     }
 }

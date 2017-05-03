@@ -18,7 +18,7 @@ namespace TddDemo.Tests
         }
 
         [TestMethod]
-        public void GivenInvalidIban_WhenValidate_ThenResultIsFalse()
+        public void GivenIbanInvalidLength_WhenValidate_ThenResultIsFalse()
         {
             ExecuteValidate("NL74 INGB 0671 5336 6", false);
         }
@@ -33,6 +33,12 @@ namespace TddDemo.Tests
         public void GivenIbanWithInvalidCharachters_WhenValidate_ThenResultIsFalse()
         {
             ExecuteValidate("NL74INGB?671533665", false);
+        }
+
+        [TestMethod]
+        public void GivenIbanWithInvalidBankCode_WhenValidate_ThenResultIsFalse()
+        {
+            ExecuteValidate("NL74ZZZZ0671533665", false);
         }
     }
 }
