@@ -37,14 +37,6 @@ namespace TddDemo
             return codes.Contains(input.Substring(4, 4));
         }
 
-        class BankCodeProvider
-        {
-            public string[] BankCodes()
-            {
-                return new[] { "INGB" };
-            }
-        }
-
         private static string RemoveWhitespace(string input)
         {
             return input.Replace(" ", "");
