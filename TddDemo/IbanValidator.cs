@@ -23,12 +23,17 @@ namespace TddDemo
                 return false;
             }
 
-            if (input.Substring(4, 4) != "INGB")
+            if (!ContainsValidBankCode(input))
             {
                 return false;
             }
 
             return true;
+        }
+
+        private static bool ContainsValidBankCode(string input)
+        {
+            return input.Substring(4, 4) == "INGB";
         }
 
         private static string RemoveWhitespace(string input)
