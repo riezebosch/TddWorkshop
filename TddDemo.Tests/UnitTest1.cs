@@ -22,7 +22,7 @@ namespace TddDemo.Tests
 
         private static bool ValidateIban(string input)
         {
-            if (input.Length != 22)
+            if (input.Replace(" ", "").Length != 18)
             {
                 return false;
             }
@@ -36,6 +36,20 @@ namespace TddDemo.Tests
             // Arrange
             string input = "NL74 INGB 0671 5336 6";
             bool expected = false;
+
+            // Act
+            bool actual = ValidateIban(input);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GivenValidIbanWithoutWhitespace_WhenValidate_ThenResultIsTrue()
+        {
+            // Arrange
+            string input = "NL74INGB0671533665";
+            bool expected = true;
 
             // Act
             bool actual = ValidateIban(input);
