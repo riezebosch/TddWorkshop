@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TddDemo.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class IbanValidatorTests
     {
         [TestMethod]
         public void GivenValidIban_WhenValidate_ThenResultIsTrue()
