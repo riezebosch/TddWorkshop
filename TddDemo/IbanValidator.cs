@@ -20,25 +20,27 @@ namespace TddDemo
         public bool ValidateIban(string input)
         {
             input = RemoveWhitespace(input);
-            if (input.Length != IBAN_LENGTH)
+            if (CheckLength(input) &&
+                CheckLettersAndNumbers(input) &&
+                CheckBankCode(input))
             {
-                return false;
+                return true;
             }
 
-            if (!input.ContainsOnlyLettersAndNumbers())
-            {
-                return false;
-            }
-
-            if (!ContainsValidBankCode(input))
-            {
-                return false;
-            }
-
-            return true;
+            return false;
         }
 
-        private bool ContainsValidBankCode(string input)
+        private static bool CheckLettersAndNumbers(string input)
+        {
+            return input.ContainsOnlyLettersAndNumbers();
+        }
+
+        private static bool CheckLength(string input)
+        {
+            return input.Length == IBAN_LENGTH;
+        }
+
+        private bool CheckBankCode(string input)
         {
             string[] codes = _provider.BankCodes();
             return codes.Contains(input.Substring(4, 4));
