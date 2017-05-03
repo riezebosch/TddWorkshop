@@ -7,7 +7,7 @@ namespace TddDemo.Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GivenValidIban_WhenValidate_ThenResultIsTrue()
         {
             // Arrange
             string input = "NL74 INGB 0671 5336 65";
