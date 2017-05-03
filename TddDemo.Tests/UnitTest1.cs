@@ -6,8 +6,6 @@ namespace TddDemo.Tests
     [TestClass]
     public class UnitTest1
     {
-        private const int IBAN_LENGTH = 18;
-
         [TestMethod]
         public void GivenValidIban_WhenValidate_ThenResultIsTrue()
         {
@@ -16,25 +14,8 @@ namespace TddDemo.Tests
 
         private static void ExecuteValidate(string iban, bool expected)
         {
-            Assert.AreEqual(expected, ValidateIban(iban));
+            Assert.AreEqual(expected, IbanValidator.ValidateIban(iban));
         }
-
-        private static bool ValidateIban(string input)
-        {
-            if (input.Replace(" ", "").Length != IBAN_LENGTH)
-            {
-                return false;
-            }
-
-            if (!input.ContainsOnlyLettersAndNumbers())
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-
 
         [TestMethod]
         public void GivenInvalidIban_WhenValidate_ThenResultIsFalse()
