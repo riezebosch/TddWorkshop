@@ -19,5 +19,11 @@ namespace TddDemo.Tests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void GivenInputIsNull_WhenValidate_ThenArgumentNullExpection()
+        {
+            Assert.Throws<ArgumentNullException>(() => StringHelper.ContainsOnlyLettersAndNumbers(null));
+        }
     }
 }

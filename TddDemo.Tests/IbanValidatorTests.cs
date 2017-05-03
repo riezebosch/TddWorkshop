@@ -49,5 +49,12 @@ namespace TddDemo.Tests
                 return new string[] { };
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void GivenInputIsNull_WhenValidate_ThenArgumentNullExpection()
+        {
+            new IbanValidator(null).ValidateIban(null);
+        }
     }
 }

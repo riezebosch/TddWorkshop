@@ -19,6 +19,11 @@ namespace TddDemo
 
         public bool ValidateIban(string input)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             input = RemoveWhitespace(input);
             if (CheckLength(input) &&
                 CheckLettersAndNumbers(input) &&

@@ -10,6 +10,11 @@ namespace TddDemo
     {
         public static bool ContainsOnlyLettersAndNumbers(this string input)
         {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
             return !input.Contains("?");
         }
     }
