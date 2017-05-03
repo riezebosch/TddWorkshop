@@ -1,6 +1,6 @@
 ﻿namespace TddDemo
 {
-    interface IBankCodeProvider
+    public interface IBankCodeProvider
     {
         string[] BankCodes();
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using TechTalk.SpecFlow;
 
@@ -18,7 +19,13 @@ namespace TddDemo.Tests
         public void WhenIExecuteValidate()
         {
             var iban = ScenarioContext.Current.Get<string>("iban");
-            var validator = new IbanValidator(new BankCodeProvider());
+
+            var mock = new Mock<IBankCodeProvider>();
+            mock
+                .Setup(m => m.BankCodes())
+                .Returns(new [] { "INGB" });
+
+            var validator = new IbanValidator(mock.Object);
 
             var result = validator.ValidateIban(iban);
             ScenarioContext.Current.Set(result, "result");
