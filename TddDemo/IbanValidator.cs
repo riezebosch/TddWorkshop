@@ -10,7 +10,14 @@ namespace TddDemo
     {
         private const int IBAN_LENGTH = 18;
 
-        public static bool ValidateIban(string input)
+        IBankCodeProvider _provider;
+
+        public IbanValidator(IBankCodeProvider provider)
+        {
+            _provider = provider;
+        }
+
+        public bool ValidateIban(string input)
         {
             input = RemoveWhitespace(input);
             if (input.Length != IBAN_LENGTH)
@@ -31,9 +38,9 @@ namespace TddDemo
             return true;
         }
 
-        private static bool ContainsValidBankCode(string input)
+        private bool ContainsValidBankCode(string input)
         {
-            string[] codes = new BankCodeProvider().BankCodes();
+            string[] codes = _provider.BankCodes();
             return codes.Contains(input.Substring(4, 4));
         }
 

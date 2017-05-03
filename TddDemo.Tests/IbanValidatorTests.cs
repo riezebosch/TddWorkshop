@@ -12,9 +12,9 @@ namespace TddDemo.Tests
             ExecuteValidate(iban: "NL74 INGB 0671 5336 65", expected: true);
         }
 
-        private static void ExecuteValidate(string iban, bool expected)
+        private static void ExecuteValidate(string iban, bool expected, IBankCodeProvider provider = null)
         {
-            Assert.AreEqual(expected, IbanValidator.ValidateIban(iban));
+            Assert.AreEqual(expected, new IbanValidator(provider ?? new BankCodeProvider()).ValidateIban(iban));
         }
 
         [TestMethod]
@@ -38,7 +38,16 @@ namespace TddDemo.Tests
         [TestMethod]
         public void GivenIbanWithInvalidBankCode_WhenValidate_ThenResultIsFalse()
         {
-            ExecuteValidate("NL74ZZZZ0671533665", false);
+            var provider = new BankCodeProviderDummy();
+            ExecuteValidate("NL74ZZZZ0671533665", false, provider);
+        }
+
+        private class BankCodeProviderDummy : IBankCodeProvider
+        {
+            public string[] BankCodes()
+            {
+                return new string[] { };
+            }
         }
     }
 }

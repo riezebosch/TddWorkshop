@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TddDemo
 {
-    class BankCodeProvider
+    class BankCodeProvider : IBankCodeProvider
     {
         public string[] BankCodes()
         {
-            return new[] { "INGB" };
+            return new[] { "INGB", "ZZZZ" };
         }
     }
 }

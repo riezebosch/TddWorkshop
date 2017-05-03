@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankCodeProvider.cs" />
+    <Compile Include="IBankCodeProvider.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringHelper.cs" />
