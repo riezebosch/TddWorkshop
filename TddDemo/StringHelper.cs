@@ -8,7 +8,7 @@ namespace TddDemo
 {
     internal static class StringHelper
     {
-        public static bool ContainsOnlyLettersAndNumbers(string input)
+        public static bool ContainsOnlyLettersAndNumbers(this string input)
         {
             return !input.Contains("?");
         }

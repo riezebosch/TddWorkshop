@@ -26,8 +26,7 @@ namespace TddDemo.Tests
                 return false;
             }
 
-
-            if (!StringHelper.ContainsOnlyLettersAndNumbers(input))
+            if (!input.ContainsOnlyLettersAndNumbers())
             {
                 return false;
             }
