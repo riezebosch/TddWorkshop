@@ -8,20 +8,30 @@ namespace TddDemo.Tests
         [Fact]
         public void EmptyIban_Validating_Reject()
         {
-            // Arrange
-            var iban = "";
-            var expected = false;
+            ValidateIban("", false);
+        }
+
+        private static void ValidateIban(string iban, bool expected)
+        {
+            var validator = new IbanValidator();
 
             // Act
-            var result = Validate(iban);
+            var result = validator.Validate(iban);
 
             // Assert
             Assert.Equal(expected, result);
         }
 
-        private static bool Validate(string iban)
+        [Fact]
+        public void ValidIban_Validating_Accepted()
         {
-            return false;
+            ValidateIban("NL76 ABNA 0473 4087 59", true);
+        }
+
+        [Fact]
+        public void InvalidIban_Validating_Reject()
+        {
+            ValidateIban("NL76 ABNA 0473 4087 5", false);
         }
     }
 }
