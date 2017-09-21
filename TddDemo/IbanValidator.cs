@@ -13,12 +13,18 @@ namespace TddDemo
             iban = Normalize(iban);
 
             return CheckNotEmpty(iban)
-                && CheckLength(iban);
+                && CheckLength(iban)
+                && CheckBankCode(iban);
+        }
+
+        private bool CheckBankCode(string iban)
+        {
+            return iban.Substring(4,4) == "ABNA";
         }
 
         private static string Normalize(string iban)
         {
-            return iban.Replace(" ", "");
+            return iban?.Replace(" ", "");
         }
 
         private static bool CheckNotEmpty(string iban)

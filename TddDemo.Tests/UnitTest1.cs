@@ -39,5 +39,18 @@ namespace TddDemo.Tests
         {
             ValidateIban("NL76ABNA0473408759", true);
         }
+
+        [Fact]
+        public void NullIban_Reject()
+        {
+            ValidateIban(null, false);
+        }
+
+        [Fact]
+        public void InvalidBankCode_Rejected()
+        {
+            ValidateIban("NL76 ABNB 0473 4087 59", false);
+        }
+
     }
 }
