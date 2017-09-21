@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankCodeResolver.cs" />
+    <Compile Include="BankCodeResolverNotAvailableException.cs" />
     <Compile Include="IBankCodeResolver.cs" />
     <Compile Include="IbanValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -27,7 +27,14 @@ namespace TddDemo
 
         private bool CheckBankCode(string iban)
         {
-            return resolver.Resolve().Contains(ExtractBankCode(iban));
+            try
+            {
+                return resolver.Resolve().Contains(ExtractBankCode(iban));
+            }
+            catch (Exception ex)
+            {
+                throw new BankCodeResolverNotAvailableException("", ex);
+            }
         }
 
         private static string ExtractBankCode(string iban)

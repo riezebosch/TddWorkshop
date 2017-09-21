@@ -2,7 +2,7 @@
 
 namespace TddDemo
 {
-    interface IBankCodeResolver
+    public interface IBankCodeResolver
     {
         IEnumerable<string> Resolve();
     }

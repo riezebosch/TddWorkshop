@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NSubstitute;
+using NSubstitute.ExceptionExtensions;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -63,6 +65,29 @@ namespace TddDemo.Tests
         public void BankCodeRejectedByMockData()
         {
             ValidateIban("NL76ABNA0473408759", false, new BankCodeResolverMock());
+        }
+
+        [Fact]
+        public void TestingBankCodesWithMockingFramework()
+        {
+            var resolver = Substitute.For<IBankCodeResolver>();
+            resolver.Resolve().Returns(new string[] { "ABNA" });
+
+            var sut = new IbanValidator(resolver);
+
+            Assert.True(sut.Validate("NL76ABNA0473408759"));
+        }
+
+        [Fact]
+        public void ExceptionFromResolverWrappedInBankCodeResolverNotAvailableException()
+        {
+            var resolver = Substitute.For<IBankCodeResolver>();
+            resolver.Resolve().Throws<Exception>();
+
+            var sut = new IbanValidator(resolver);
+
+            var ex = Assert.Throws<BankCodeResolverNotAvailableException>(() => sut.Validate("NL76ABNA0473408759"));
+            Assert.IsType<Exception>(ex.InnerException);
         }
     }
 
