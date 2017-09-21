@@ -10,8 +10,15 @@ namespace TddDemo
     {
         public bool Validate(string iban)
         {
+            iban = Normalize(iban);
+
             return CheckNotEmpty(iban)
                 && CheckLength(iban);
+        }
+
+        private static string Normalize(string iban)
+        {
+            return iban.Replace(" ", "");
         }
 
         private static bool CheckNotEmpty(string iban)
@@ -21,7 +28,7 @@ namespace TddDemo
 
         private static bool CheckLength(string iban)
         {
-            const int ibanLength = 22;
+            const int ibanLength = 18;
             return iban.Length == ibanLength;
         }
     }

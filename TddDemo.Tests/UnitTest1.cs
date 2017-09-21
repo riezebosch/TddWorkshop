@@ -6,7 +6,7 @@ namespace TddDemo.Tests
     public class UnitTest1
     {
         [Fact]
-        public void EmptyIban_Validating_Reject()
+        public void EmptyIban_Reject()
         {
             ValidateIban("", false);
         }
@@ -23,15 +23,21 @@ namespace TddDemo.Tests
         }
 
         [Fact]
-        public void ValidIban_Validating_Accepted()
+        public void ValidIban_Accepted()
         {
             ValidateIban("NL76 ABNA 0473 4087 59", true);
         }
 
         [Fact]
-        public void InvalidIban_Validating_Reject()
+        public void InvalidIban_Reject()
         {
             ValidateIban("NL76 ABNA 0473 4087 5", false);
+        }
+
+        [Fact]
+        public void ValidIbanWithoutSpaces_Accepted()
+        {
+            ValidateIban("NL76ABNA0473408759", true);
         }
     }
 }
