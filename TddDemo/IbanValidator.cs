@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TddDemo
@@ -19,7 +20,12 @@ namespace TddDemo
 
         private bool CheckBankCode(string iban)
         {
-            return iban.Substring(4,4) == "ABNA";
+            return (new string[] { "ABNA", "INGB" }).Contains(ExtractBankCode(iban));
+        }
+
+        private static string ExtractBankCode(string iban)
+        {
+            return iban.Substring(4, 4);
         }
 
         private static string Normalize(string iban)

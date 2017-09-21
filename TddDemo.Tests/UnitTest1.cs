@@ -51,6 +51,11 @@ namespace TddDemo.Tests
         {
             ValidateIban("NL76 ABNB 0473 4087 59", false);
         }
-
+        
+        [Fact]
+        public void DifferentBankCode_Accepted()
+        {
+            ValidateIban("NL86 INGB 0002 4455 88", true);
+        }
     }
 }
