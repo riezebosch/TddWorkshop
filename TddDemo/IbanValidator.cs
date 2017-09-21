@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace TddDemo
 {
-    internal partial class IbanValidator
+    internal class IbanValidator
     {
+        IBankCodeResolver resolver = new BankCodeResolver();
+
+        public IbanValidator(IBankCodeResolver resolver)
+        {
+            this.resolver = resolver;
+        }
+
         public bool Validate(string iban)
         {
             iban = Normalize(iban);
@@ -20,7 +27,6 @@ namespace TddDemo
 
         private bool CheckBankCode(string iban)
         {
-            var resolver = new BankCodeResolver();
             return resolver.Resolve().Contains(ExtractBankCode(iban));
         }
 

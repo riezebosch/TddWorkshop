@@ -1,13 +1,12 @@
-﻿namespace TddDemo
+﻿using System.Collections.Generic;
+
+namespace TddDemo
 {
-    internal partial class IbanValidator
+    class BankCodeResolver : IBankCodeResolver
     {
-        class BankCodeResolver
+        public IEnumerable<string> Resolve()
         {
-            public string[] Resolve()
-            {
-                return new string[] { "ABNA", "INGB" };
-            }
+            return new string[] { "ABNA", "INGB", "ABNB" };
         }
     }
 }
