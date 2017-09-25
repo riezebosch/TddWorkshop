@@ -61,8 +61,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="IbanCheckerBE.cs" />
+    <Compile Include="IbanCheckerFactory.cs" />
+    <Compile Include="IbanCheckerNL.cs" />
+    <Compile Include="IbanCheckerBETests.cs" />
+    <Compile Include="IbanCheckerNLTests.cs" />
+    <Compile Include="IIbanChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TddDemo\TddDemo.csproj">
