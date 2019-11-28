@@ -27,9 +27,8 @@ namespace WebApplication1.Tests
             actual
                 .Result
                 .Should()
-                .BeOfType<OkObjectResult>();
-
-            ((OkObjectResult)actual.Result)
+                .BeOfType<OkObjectResult>()
+                .Which
                 .Value
                 .Should()
                 .BeEquivalentTo(new BankAccount(1, "iban"));
