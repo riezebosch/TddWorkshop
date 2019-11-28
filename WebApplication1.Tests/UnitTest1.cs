@@ -38,19 +38,17 @@ namespace WebApplication1.Tests
         public void NotFound()
         {
             // Arrange
-            using (var context = new DemoContext(new DbContextOptionsBuilder<DemoContext>().UseInMemoryDatabase(nameof(UnitTest1)).Options))
-            {
-                var controller = new BankAccountController(context);
+            using var context = new DemoContext(new DbContextOptionsBuilder<DemoContext>().UseInMemoryDatabase(nameof(UnitTest1)).Options);
+            var controller = new BankAccountController(context);
 
-                // Act
-                var account = controller.Get("other");
+            // Act
+            var account = controller.Get("other");
 
-                // Assert
-                account
-                    .Result
-                    .Should()
-                    .BeOfType<NotFoundResult>();
-            }
+            // Assert
+            account
+                .Result
+                .Should()
+                .BeOfType<NotFoundResult>();
         }
     }
 }
